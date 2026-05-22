@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PolicyAdmin.Application\PolicyAdmin.Application.csproj" />
+    <ProjectReference Include="..\PolicyAdmin.Domain\PolicyAdmin.Domain.csproj" />
+    <ProjectReference Include="..\PolicyAdmin.Shared\PolicyAdmin.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
