@@ -1,9 +1,9 @@
-﻿using PolicyAdmin.Domain.Entities;
+﻿using PolicyAdmin.Application.DTOs;
 
 namespace PolicyAdmin.Application.Interfaces
 {
     public interface IPolicyHolderService
     {
-        Task<IEnumerable<PolicyHolder>> GetAllPolicyHoldersAsync();
+        Task<IEnumerable<PolicyHolderResponseDto>> GetAllPolicyHoldersAsync();
     }
 }

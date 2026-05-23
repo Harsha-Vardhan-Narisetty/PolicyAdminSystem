@@ -11,8 +11,4 @@
     <ProjectReference Include="..\PolicyAdmin.Shared\PolicyAdmin.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\" />
-  </ItemGroup>
-
 </Project>

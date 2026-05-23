@@ -1,4 +1,5 @@
 ﻿using PolicyAdmin.Application.Interfaces;
+using PolicyAdmin.Application.DTOs;
 using PolicyAdmin.Domain.Entities;
 
 namespace PolicyAdmin.Application.Services
@@ -12,9 +13,24 @@ namespace PolicyAdmin.Application.Services
             _policyHolderRepository = policyHolderRepository;
         }
 
-        public async Task<IEnumerable<PolicyHolder>> GetAllPolicyHoldersAsync()
+        public async Task<IEnumerable<PolicyHolderResponseDto>> GetAllPolicyHoldersAsync()
         {
-            return await _policyHolderRepository.GetAllAsync();
+            var policyHolders = await _policyHolderRepository.GetAllAsync();
+
+            var response = policyHolders.Select(PolicyHolder => new PolicyHolderResponseDto
+            {
+                PolicyHolderId = PolicyHolder.PolicyHolderId,
+
+                FullName = $"{PolicyHolder.FirstName} {PolicyHolder.LastName}",
+
+                Email = PolicyHolder.Email,
+
+                PhoneNumber = PolicyHolder.PhoneNumber,
+
+                City = PolicyHolder.City
+            });
+
+            return response;
         }
     }
 }
