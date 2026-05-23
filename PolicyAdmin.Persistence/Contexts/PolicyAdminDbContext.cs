@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using PolicyAdmin.Persistence.Models;
+using PolicyAdmin.Domain.Entities;
 
 namespace PolicyAdmin.Persistence.Contexts;
 
