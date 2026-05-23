@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using PolicyAdmin.Persistence.Contexts;
 using PolicyAdmin.Application.Interfaces;
+using PolicyAdmin.Application.Services;
+using PolicyAdmin.Persistence.Contexts;
 using PolicyAdmin.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPolicyHolderRepository, PolicyHolderRepository>();
+
+builder.Services.AddScoped<IPolicyHolderService, PolicyHolderService>();
 
 builder.Services.AddDbContext<PolicyAdminDbContext>(options =>
 {

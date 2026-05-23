@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using PolicyAdmin.Persistence.Contexts;
 using PolicyAdmin.Application.Interfaces;
 
 namespace PolicyAdmin.API.Controllers
@@ -9,17 +7,17 @@ namespace PolicyAdmin.API.Controllers
     [ApiController]
     public class PolicyHoldersController : ControllerBase
     {
-        private readonly IPolicyHolderRepository _policyHolderRepository;
+        private readonly IPolicyHolderService _policyHolderService;
 
-        public PolicyHoldersController(IPolicyHolderRepository policyHolderRepository)
+        public PolicyHoldersController(IPolicyHolderService policyHolderService)
         {
-            _policyHolderRepository = policyHolderRepository;
+            _policyHolderService = policyHolderService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllPolicyHolders()
         {
-            var policyHolders = await _policyHolderRepository.GetAllAsync();
+            var policyHolders = await _policyHolderService.GetAllPolicyHoldersAsync();
 
             return Ok(policyHolders);
         }
