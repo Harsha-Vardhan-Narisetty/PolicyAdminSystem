@@ -18,5 +18,14 @@ namespace PolicyAdmin.Persistence.Repositories
         {
             return await _context.PolicyHolders.ToListAsync();
         }
+
+        public async Task<PolicyHolder> AddAsync(PolicyHolder policyHolder)
+        {
+            await _context.PolicyHolders.AddAsync(policyHolder);
+
+            await _context.SaveChangesAsync();
+
+            return policyHolder;
+        }
     }
 }

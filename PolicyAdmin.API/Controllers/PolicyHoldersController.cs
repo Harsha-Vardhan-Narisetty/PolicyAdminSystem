@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PolicyAdmin.Application.DTOs;
 using PolicyAdmin.Application.Interfaces;
 
 namespace PolicyAdmin.API.Controllers
@@ -20,6 +21,14 @@ namespace PolicyAdmin.API.Controllers
             var policyHolders = await _policyHolderService.GetAllPolicyHoldersAsync();
 
             return Ok(policyHolders);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> createPolicyHolder(CreatePolicyHolderRequestDto request)
+        {
+            var createdPolicyHolder = await _policyHolderService.CreatePolicyHolderAsync(request);
+
+            return Ok(createdPolicyHolder);
         }
     }
 }
