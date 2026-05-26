@@ -1,5 +1,6 @@
 ﻿using PolicyAdmin.Application.DTOs;
 using PolicyAdmin.Application.Interfaces;
+using PolicyAdmin.Application.Responses;
 using PolicyAdmin.Domain.Entities;
 
 namespace PolicyAdmin.Application.Services
@@ -13,7 +14,7 @@ namespace PolicyAdmin.Application.Services
             _policyHolderRepository = policyHolderRepository;
         }
 
-        public async Task<IEnumerable<PolicyHolderResponseDto>> GetAllPolicyHoldersAsync()
+        public async Task<ApiResponse<IEnumerable<PolicyHolderResponseDto>>> GetAllPolicyHoldersAsync()
         {
 
             var policyHolders = await _policyHolderRepository.GetAllAsync();
@@ -31,10 +32,17 @@ namespace PolicyAdmin.Application.Services
                 City = policyHolder.City
             });
 
-            return response;
+            return new ApiResponse<IEnumerable<PolicyHolderResponseDto>>
+            {
+                Success = true,
+
+                Message = "Policy holders fetched successfully",
+
+                Data = response
+            };
         }
 
-        public async Task<PolicyHolderResponseDto> CreatePolicyHolderAsync(CreatePolicyHolderRequestDto request)
+        public async Task<ApiResponse<PolicyHolderResponseDto>> CreatePolicyHolderAsync(CreatePolicyHolderRequestDto request)
         {
             var policyHolder = new PolicyHolder
             {
@@ -69,7 +77,7 @@ namespace PolicyAdmin.Application.Services
 
             var createdPolicyHolder = await _policyHolderRepository.AddAsync(policyHolder);
 
-            return new PolicyHolderResponseDto
+            var responseDto = new PolicyHolderResponseDto
             {
                 PolicyHolderId = createdPolicyHolder.PolicyHolderId,
 
@@ -80,6 +88,15 @@ namespace PolicyAdmin.Application.Services
                 PhoneNumber = createdPolicyHolder.PhoneNumber,
 
                 City = createdPolicyHolder.City
+            };
+
+            return new ApiResponse<PolicyHolderResponseDto>
+            {
+                Success = true,
+
+                Message = "Policy holder created successfully",
+
+                Data = responseDto
             };
         }
     }
