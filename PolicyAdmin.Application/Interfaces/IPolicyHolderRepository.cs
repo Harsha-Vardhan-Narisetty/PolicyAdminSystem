@@ -7,5 +7,9 @@ namespace PolicyAdmin.Application.Interfaces
         Task<IEnumerable<PolicyHolder>> GetAllAsync();
 
         Task<PolicyHolder> AddAsync(PolicyHolder policyHolder);
+
+        Task<PolicyHolder?> GetByIdAsync(int id);
+
+        Task<PolicyHolder> UpdateAsync(PolicyHolder policyHolder);
     }
 }

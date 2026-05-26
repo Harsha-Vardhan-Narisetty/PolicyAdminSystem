@@ -27,5 +27,20 @@ namespace PolicyAdmin.Persistence.Repositories
 
             return policyHolder;
         }
+
+        public async Task<PolicyHolder?> GetByIdAsync(int id)
+        {
+            return await _context.PolicyHolders
+                .FirstOrDefaultAsync(x=> x.PolicyHolderId == id);
+        }
+
+        public async Task<PolicyHolder> UpdateAsync(PolicyHolder policyHolder)
+        {
+            _context.PolicyHolders.Update(policyHolder);
+
+            await _context.SaveChangesAsync();
+
+            return policyHolder;
+        }
     }
 }

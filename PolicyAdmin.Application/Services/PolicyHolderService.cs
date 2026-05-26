@@ -99,5 +99,71 @@ namespace PolicyAdmin.Application.Services
                 Data = responseDto
             };
         }
+
+        public async Task<ApiResponse<PolicyHolderResponseDto>> UpdatePolicyHolderAsync(
+            int id,
+            UpdatePolicyHolderRequestDto request)
+        {
+            var existingPolicyHolder = await _policyHolderRepository.GetByIdAsync(id);
+
+            if (existingPolicyHolder == null)
+            {
+                return new ApiResponse<PolicyHolderResponseDto>
+                {
+                    Success = false,
+
+                    Message = $"Policy holder with ID {id} not found"
+                };
+            }
+
+            existingPolicyHolder.FirstName = request.FirstName;
+
+            existingPolicyHolder.LastName = request.LastName;
+
+            existingPolicyHolder.DateOfBirth = request.DateOfBirth;
+
+            existingPolicyHolder.Gender = request.Gender;
+
+            existingPolicyHolder.Email = request.Email;
+
+            existingPolicyHolder.PhoneNumber = request.PhoneNumber;
+
+            existingPolicyHolder.AddressLine1 = request.AddressLine1;
+
+            existingPolicyHolder.AddressLine2 = request.AddressLine2;
+
+            existingPolicyHolder.City = request.City;
+
+            existingPolicyHolder.State = request.State;
+
+            existingPolicyHolder.PostalCode = request.PostalCode;
+
+            existingPolicyHolder.Country = request.Country;
+
+            var updatedPolicyHolder = await _policyHolderRepository.UpdateAsync(existingPolicyHolder);
+
+            var responseDto = new PolicyHolderResponseDto
+            {
+                PolicyHolderId = updatedPolicyHolder.PolicyHolderId,
+
+                FullName = $"{updatedPolicyHolder.FirstName} {updatedPolicyHolder.LastName}",
+
+                Email = updatedPolicyHolder.Email,
+
+                PhoneNumber = updatedPolicyHolder.PhoneNumber,
+
+                City = updatedPolicyHolder.City
+            };
+
+            return new ApiResponse<PolicyHolderResponseDto>
+            {
+                Success = true,
+
+                Message = "Policy holder updated successfully",
+
+                Data = responseDto
+            };
+
+        }
     }
 }

@@ -30,5 +30,20 @@ namespace PolicyAdmin.API.Controllers
 
             return Ok(createdPolicyHolder);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdatePolicyHolder(
+            int id,
+            UpdatePolicyHolderRequestDto request)
+        {
+            var response = await _policyHolderService.UpdatePolicyHolderAsync(id, request);
+
+            if(!response.Success)
+            {
+                return NotFound(response);
+            }
+
+            return Ok(response);
+        }
     }
 }
