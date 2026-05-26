@@ -3,6 +3,7 @@ using PolicyAdmin.Application.Interfaces;
 using PolicyAdmin.Application.Services;
 using PolicyAdmin.Persistence.Contexts;
 using PolicyAdmin.Persistence.Repositories;
+using PolicyAdmin.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

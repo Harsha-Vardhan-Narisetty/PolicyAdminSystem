@@ -15,6 +15,7 @@ namespace PolicyAdmin.Application.Services
 
         public async Task<IEnumerable<PolicyHolderResponseDto>> GetAllPolicyHoldersAsync()
         {
+
             var policyHolders = await _policyHolderRepository.GetAllAsync();
 
             var response = policyHolders.Select(policyHolder => new PolicyHolderResponseDto
@@ -41,7 +42,7 @@ namespace PolicyAdmin.Application.Services
 
                 LastName = request.LastName,
 
-                DateOfBirth = DateOnly.FromDateTime(request.DateOfBirth),
+                DateOfBirth = request.DateOfBirth,
 
                 Gender = request.Gender,
 
