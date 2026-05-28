@@ -165,5 +165,31 @@ namespace PolicyAdmin.Application.Services
             };
 
         }
+
+        public async Task<ApiResponse<string>> DeletePolicyHolderAsync(int id)
+        {
+            var existingPolicyHolder = await _policyHolderRepository.GetByIdAsync(id);
+
+            if(existingPolicyHolder == null)
+            {
+                return new ApiResponse<string>
+                {
+                    Success = false,
+
+                    Message = $"Policy holder with ID {id} not found"
+                };
+            }
+
+            await _policyHolderRepository.SoftDeleteAsync(existingPolicyHolder);
+
+            return new ApiResponse<string>
+            {
+                Success = true,
+
+                Message = "Policy holder deleted successfully",
+
+                Data = $"Deleted policy holder ID: {id}"
+            };
+        }
     }
 }

@@ -45,5 +45,19 @@ namespace PolicyAdmin.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeletePolicyHolder(int id)
+        {
+            var response = await _policyHolderService.DeletePolicyHolderAsync(id);
+
+            if(!response.Success)
+            {
+                return NotFound(response);
+            }
+
+            return Ok(response);
+
+        }
     }
 }

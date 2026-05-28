@@ -16,7 +16,9 @@ namespace PolicyAdmin.Persistence.Repositories
 
         public async Task<IEnumerable<PolicyHolder>> GetAllAsync()
         {
-            return await _context.PolicyHolders.ToListAsync();
+            return await _context.PolicyHolders
+                .Where(x => x.IsActive)
+                .ToListAsync();
         }
 
         public async Task<PolicyHolder> AddAsync(PolicyHolder policyHolder)
@@ -31,7 +33,9 @@ namespace PolicyAdmin.Persistence.Repositories
         public async Task<PolicyHolder?> GetByIdAsync(int id)
         {
             return await _context.PolicyHolders
-                .FirstOrDefaultAsync(x=> x.PolicyHolderId == id);
+                .FirstOrDefaultAsync(x =>
+                    x.PolicyHolderId == id &&
+                    x.IsActive);
         }
 
         public async Task<PolicyHolder> UpdateAsync(PolicyHolder policyHolder)
@@ -41,6 +45,15 @@ namespace PolicyAdmin.Persistence.Repositories
             await _context.SaveChangesAsync();
 
             return policyHolder;
+        }
+
+        public async Task SoftDeleteAsync(PolicyHolder policyHolder)
+        {
+            policyHolder.IsActive = false;
+
+            _context.PolicyHolders.Update(policyHolder);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

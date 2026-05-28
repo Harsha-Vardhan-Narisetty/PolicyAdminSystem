@@ -7,10 +7,13 @@ namespace PolicyAdmin.Application.Interfaces
     {
         Task<ApiResponse<IEnumerable<PolicyHolderResponseDto>>> GetAllPolicyHoldersAsync();
 
-        Task<ApiResponse<PolicyHolderResponseDto>> CreatePolicyHolderAsync(CreatePolicyHolderRequestDto request);
+        Task<ApiResponse<PolicyHolderResponseDto>> CreatePolicyHolderAsync(
+            CreatePolicyHolderRequestDto request);
 
         Task<ApiResponse<PolicyHolderResponseDto>> UpdatePolicyHolderAsync(
             int id,
             UpdatePolicyHolderRequestDto request);
+
+        Task<ApiResponse<string>> DeletePolicyHolderAsync(int id);
     }
 }

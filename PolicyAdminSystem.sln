@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37314.3 d17.14
+VisualStudioVersion = 17.14.37314.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyAdmin.API", "PolicyAdmin.API\PolicyAdmin.API.csproj", "{D4B349BE-10BB-4274-A375-97169D6C26FC}"
 EndProject
@@ -14,6 +14,19 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyAdmin.Persistence", "PolicyAdmin.Persistence\PolicyAdmin.Persistence.csproj", "{13A48A6D-2C3D-4C65-9141-698ADBA5EB0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyAdmin.Shared", "PolicyAdmin.Shared\PolicyAdmin.Shared.csproj", "{B1B69F6A-E7BB-4220-8BB0-4EDFE1A79E86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		CrudApis.md = CrudApis.md
+		DatabaseAndEFCore.md = DatabaseAndEFCore.md
+		DependencyInjection.md = DependencyInjection.md
+		DesignPatternsAndSolidPrinciples.md = DesignPatternsAndSolidPrinciples.md
+		GitWorkflowAndDevelopmentProcess.md = GitWorkflowAndDevelopmentProcess.md
+		MiddlewareAndExceptionHandling.md = MiddlewareAndExceptionHandling.md
+		ProjectOverview.md = ProjectOverview.md
+		RequestFlow.md = RequestFlow.md
+		SolutionStructure.md = SolutionStructure.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

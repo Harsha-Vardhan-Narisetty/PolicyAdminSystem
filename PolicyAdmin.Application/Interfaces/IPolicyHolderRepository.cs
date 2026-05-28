@@ -11,5 +11,7 @@ namespace PolicyAdmin.Application.Interfaces
         Task<PolicyHolder?> GetByIdAsync(int id);
 
         Task<PolicyHolder> UpdateAsync(PolicyHolder policyHolder);
+
+        Task SoftDeleteAsync(PolicyHolder policyHolder);
     }
 }
