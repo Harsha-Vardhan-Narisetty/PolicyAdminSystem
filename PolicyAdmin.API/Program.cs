@@ -18,6 +18,10 @@ builder.Services.AddScoped<IPolicyHolderRepository, PolicyHolderRepository>();
 
 builder.Services.AddScoped<IPolicyHolderService, PolicyHolderService>();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddDbContext<PolicyAdminDbContext>(options =>
 {
     options.UseSqlServer(
