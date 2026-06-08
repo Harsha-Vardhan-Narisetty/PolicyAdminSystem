@@ -8,10 +8,14 @@ namespace PolicyAdmin.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ITokenService _tokenService;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(
+            IUserRepository userRepository,
+            ITokenService tokenService)
         {
             _userRepository = userRepository;
+            _tokenService = tokenService;
         }
 
         public async Task<ApiResponse<UserResponseDto>> RegisterUserAsync(
@@ -85,6 +89,8 @@ namespace PolicyAdmin.Application.Services
                 };
             }
 
+            var token = _tokenService.GenerateToken(user);
+
             var response = new LoginResponseDto
             {
                 UserId = user.UserId,
@@ -93,7 +99,11 @@ namespace PolicyAdmin.Application.Services
 
                 Email = user.Email,
 
-                Role = user.Role
+                Role = user.Role,
+
+                Token = token,
+
+                ExpiresAt = DateTime.UtcNow.AddMinutes(60)
             };
 
             return new ApiResponse<LoginResponseDto>

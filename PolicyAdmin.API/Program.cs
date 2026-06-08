@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using PolicyAdmin.Application.Authentication;
 using PolicyAdmin.Application.Interfaces;
 using PolicyAdmin.Application.Services;
 using PolicyAdmin.Persistence.Contexts;
 using PolicyAdmin.Persistence.Repositories;
 using PolicyAdmin.API.Middleware;
+using PolicyAdmin.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,11 +24,16 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<ITokenService, TokenService>();
+
 builder.Services.AddDbContext<PolicyAdminDbContext>(options =>
 {
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.Configure<JwtSettings>(
+    builder.Configuration.GetSection("JwtSettings"));
 
 var app = builder.Build();
 
