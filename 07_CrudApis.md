@@ -516,6 +516,34 @@ SQL Server
 ```
 
 ---
+# Authentication APIs
+
+## Register User
+
+POST /api/Users/register
+
+Purpose:
+
+Creates a new user account.
+
+---
+
+## Login User
+
+POST /api/Users/login
+
+Purpose:
+
+Authenticates user and returns JWT token.
+
+Response Includes:
+
+- UserId
+- FullName
+- Email
+- Role
+- JWT Token
+- Token Expiration
 
 # Important Enterprise Concepts Used
 

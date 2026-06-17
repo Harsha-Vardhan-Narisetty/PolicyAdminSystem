@@ -1,374 +1,251 @@
-# Solution Structure
+﻿# Solution Structure
 
-The Policy Admin System solution is divided into multiple projects following Clean Architecture principles.
+The solution follows Clean Architecture principles.
 
-Each project has a specific responsibility.
-
-This separation helps maintain:
-- clean code organization
-- loose coupling
-- scalability
-- maintainability
-- testability
+Projects are organized based on responsibilities and dependencies.
 
 ---
 
-# Solution Projects
+PolicyAdminSystem
 
-The solution currently contains the following projects:
+│
 
-1. PolicyAdmin.API
-2. PolicyAdmin.Application
-3. PolicyAdmin.Domain
-4. PolicyAdmin.Infrastructure
-5. PolicyAdmin.Persistence
-6. PolicyAdmin.Shared
+├── PolicyAdmin.API
 
----
+├── PolicyAdmin.Application
 
-# 1. PolicyAdmin.API
+├── PolicyAdmin.Domain
 
-## Purpose
+├── PolicyAdmin.Infrastructure
 
-This is the presentation layer of the application.
+├── PolicyAdmin.Persistence
 
-It exposes REST APIs to external clients such as:
-- Swagger
-- Angular frontend
-- Postman
-- Mobile applications
+└── PolicyAdmin.Shared
 
 ---
 
-## Responsibilities
+# Project Responsibilities
 
-The API layer is responsible for:
+## PolicyAdmin.API
 
-- Receiving HTTP requests
-- Returning HTTP responses
-- Calling application services
-- Configuring middleware
-- Dependency injection configuration
-- Authentication and authorization (future)
-- API routing
+Purpose:
 
----
+Entry point of the application.
 
-## Current Folders
+Responsibilities:
 
-### Controllers
+- Controllers
+- Middleware
+- Authentication Configuration
+- Authorization Configuration
+- Dependency Injection Registration
+- Swagger Configuration
+- HTTP Request Handling
 
-Contains API controllers.
+Key Components:
 
-Example:
+Controllers
 
-```text
-PolicyHoldersController.cs
-```
+- PolicyHoldersController
+- UsersController
 
-Controllers receive incoming HTTP requests and call the service layer.
+Middleware
 
----
+- ExceptionHandlingMiddleware
 
-### Middleware
+Services
 
-Contains custom middleware components.
+- CurrentUserService
 
-Example:
+Files
 
-```text
-ExceptionHandlingMiddleware.cs
-```
-
-Middleware handles:
-- centralized exception handling
-- logging
-- request/response processing
+- Program.cs
+- appsettings.json
 
 ---
 
-### Properties
+## PolicyAdmin.Application
 
-Contains launch settings.
+Purpose:
 
-Example:
+Contains business logic and application rules.
 
-```text
-launchSettings.json
-```
+Responsibilities:
 
-Used for:
-- application URLs
-- environment configuration
-- debugging profiles
+- Services
+- Interfaces
+- DTOs
+- Application-level responses
 
----
+Key Folders:
 
-### Program.cs
+DTOs
 
-Application startup file.
+Interfaces
 
-Responsible for:
-- configuring services
-- dependency injection
-- middleware registration
-- Swagger configuration
-- database connection setup
+Services
 
----
+Responses
 
-### appsettings.json
+Important Files:
 
-Contains application configuration.
+Interfaces
 
-Currently stores:
-- SQL Server connection string
-- logging configuration
+- IPolicyHolderService
+- IUserService
+- IPolicyHolderRepository
+- IUserRepository
+- ICurrentUserService
 
----
+Services
 
-# 2. PolicyAdmin.Application
+- PolicyHolderService
+- UserService
 
-## Purpose
+DTOs
 
-Contains application business logic.
-
-This layer acts as the core business orchestration layer between:
-- API layer
-- Persistence layer
-
----
-
-## Responsibilities
-
-- Business logic
-- DTO definitions
-- Service interfaces
-- Service implementations
-- API response models
-- Repository contracts
-
----
-
-## Current Folders
-
-### DTOs
-
-DTO = Data Transfer Object
-
-Used to transfer data between layers.
-
-Current DTOs:
 - CreatePolicyHolderRequestDto
 - UpdatePolicyHolderRequestDto
 - PolicyHolderResponseDto
 
-DTOs help:
-- avoid exposing entities directly
-- control API contracts
-- improve security
-- simplify responses
+- RegisterUserRequestDto
+- LoginRequestDto
+- LoginResponseDto
+- UserResponseDto
 
 ---
 
-### Interfaces
+## PolicyAdmin.Domain
 
-Contains contracts/interfaces.
-
-Current interfaces:
-- IPolicyHolderService
-- IPolicyHolderRepository
-
-Interfaces help achieve:
-- loose coupling
-- dependency inversion
-- testability
-
----
-
-### Responses
-
-Contains generic API response models.
-
-Current file:
-
-```text
-ApiResponse.cs
-```
-
-Used to standardize API responses.
-
----
-
-### Services
-
-Contains business logic implementations.
-
-Current file:
-
-```text
-PolicyHolderService.cs
-```
-
-Responsible for:
-- business validations
-- calling repositories
-- DTO mapping
-- response generation
-
----
-
-# 3. PolicyAdmin.Domain
-
-## Purpose
+Purpose:
 
 Contains core business entities.
 
-This is the heart of the application.
+Responsibilities:
 
-The Domain layer should contain:
-- entities
-- enums
-- domain rules
-- business models
+- Domain Models
+- Entity Definitions
 
-This layer should NOT depend on other layers.
+Entities:
 
----
+- PolicyHolder
+- User
 
-## Current Folders
-
-### Entities
-
-Contains database entities/models.
-
-Current entity:
-
-```text
-PolicyHolder.cs
-```
-
-Represents the PolicyHolders database table.
+The Domain project contains no database logic or API logic.
 
 ---
 
-# 4. PolicyAdmin.Infrastructure
+## PolicyAdmin.Infrastructure
 
-## Purpose
+Purpose:
 
-Reserved for external integrations and infrastructure services.
+Contains infrastructure-related services.
 
-Currently not heavily used.
+Responsibilities:
 
-Future usage may include:
-- email services
-- file storage
-- third-party APIs
-- SMS services
-- payment gateways
+- JWT Token Generation
+- External Service Integrations
+
+Services:
+
+- TokenService
+
+Authentication:
+
+- JwtSettings
 
 ---
 
-# 5. PolicyAdmin.Persistence
+## PolicyAdmin.Persistence
 
-## Purpose
+Purpose:
 
 Handles database operations.
 
-This layer communicates directly with SQL Server using Entity Framework Core.
+Responsibilities:
 
----
-
-## Responsibilities
-
-- database access
-- repositories
+- Entity Framework Core
+- SQL Server Access
+- Repositories
 - DbContext
-- Entity Framework configuration
+
+Key Components:
+
+Contexts
+
+- PolicyAdminDbContext
+
+Repositories
+
+- PolicyHolderRepository
+- UserRepository
 
 ---
 
-## Current Folders
+## PolicyAdmin.Shared
 
-### Contexts
+Purpose:
 
-Contains Entity Framework DbContext.
+Shared components used across multiple projects.
 
-Current file:
+Responsibilities:
 
-```text
-PolicyAdminDbContext.cs
-```
+- Shared Models
+- Shared Utilities
+- Common Constants
 
-Acts as bridge between:
-- C# entities
-- SQL Server database
+(Currently minimal but available for future expansion)
 
 ---
 
-### Repositories
+# Dependency Flow
 
-Contains repository implementations.
+Dependencies flow inward.
 
-Current file:
+API
+↓
+Application
+↓
+Domain
 
-```text
-PolicyHolderRepository.cs
-```
+Infrastructure and Persistence implement interfaces defined in Application.
 
-Responsible for:
-- CRUD database operations
-- querying data
-- saving data
-- soft delete implementation
+This ensures loose coupling and maintainability.
 
 ---
 
-# 6. PolicyAdmin.Shared
+# Authentication Components
 
-## Purpose
+User Authentication is implemented using:
 
-Contains reusable shared components.
-
-Currently minimal.
-
-Future usage may include:
-- constants
-- utility classes
-- common helper methods
-- shared enums
-- shared models
+- User Entity
+- UserRepository
+- UserService
+- TokenService
+- CurrentUserService
+- JWT Authentication
+- JWT Authorization
 
 ---
 
-# Current Request Flow
+# Audit Components
 
-Current application flow:
+Audit functionality is implemented using:
 
-```text
-Client Request
-    ?
-Controller
-    ?
-Service Layer
-    ?
-Repository Layer
-    ?
-DbContext
-    ?
-SQL Server
-```
+- CreatedDate
+- CreatedBy
+- ModifiedDate
+- ModifiedBy
+
+CurrentUserService retrieves the logged-in user information from JWT claims and populates audit fields automatically.
 
 ---
 
-# Architectural Benefits
+# Benefits Of This Structure
 
-The current architecture provides:
-
-- Separation of concerns
+- Separation of Concerns
 - Maintainability
+- Testability
 - Scalability
-- Reusability
-- Easier testing
-- Better organization
-- Enterprise-level structure
+- Enterprise-Ready Design
+- Easier Team Collaboration

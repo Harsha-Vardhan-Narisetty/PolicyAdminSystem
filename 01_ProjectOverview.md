@@ -8,10 +8,49 @@ The purpose of this system is to manage insurance policy holder information thro
 
 Currently, the application supports:
 
+### Policy Holder Management
+
 * Creating policy holders
 * Retrieving policy holders
 * Updating policy holders
 * Soft deleting policy holders
+
+### User Management
+
+* User registration
+* User login
+* BCrypt password hashing
+
+### Authentication
+
+* JWT token generation
+* JWT authentication
+* JWT authorization
+* Swagger JWT integration
+
+### Authorization
+
+* Role-based authorization
+* Admin and User roles
+* Endpoint-level access control
+
+### Auditing
+
+* CreatedDate tracking
+* ModifiedDate tracking
+* CreatedBy tracking
+* ModifiedBy tracking
+
+### Architecture Features
+
+* Clean Architecture
+* Repository Pattern
+* Service Layer
+* DTO Pattern
+* Dependency Injection
+* Global Exception Handling Middleware
+* Entity Framework Core
+* SQL Server Integration
 
 The project is designed in a scalable and maintainable enterprise architecture so that additional modules such as:
 
@@ -140,4 +179,32 @@ The backend currently supports:
 * API Response Wrapper
 * Soft Delete
 
-Authentication and Authorization using JWT tokens will be implemented next.
+## Current Project Status
+
+Version: 1.2
+
+Completed Modules:
+
+✓ Policy Holder CRUD
+
+✓ User Registration
+
+✓ User Login
+
+✓ BCrypt Password Hashing
+
+✓ JWT Authentication
+
+✓ JWT Authorization
+
+✓ Role-Based Authorization
+
+✓ Claims-Based Identity
+
+✓ Audit Fields
+
+✓ Global Exception Handling
+
+✓ Git Version Control
+
+The backend is now considered feature-complete for the initial release and is ready for frontend integration.

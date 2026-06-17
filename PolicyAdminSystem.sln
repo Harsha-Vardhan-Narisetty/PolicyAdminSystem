@@ -17,16 +17,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyAdmin.Shared", "Polic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
-		AuthenticationAndJwt.md = AuthenticationAndJwt.md
-		CrudApis.md = CrudApis.md
-		DatabaseAndEFCore.md = DatabaseAndEFCore.md
-		DependencyInjection.md = DependencyInjection.md
-		DesignPatternsAndSolidPrinciples.md = DesignPatternsAndSolidPrinciples.md
-		GitWorkflowAndDevelopmentProcess.md = GitWorkflowAndDevelopmentProcess.md
-		MiddlewareAndExceptionHandling.md = MiddlewareAndExceptionHandling.md
-		ProjectOverview.md = ProjectOverview.md
-		RequestFlow.md = RequestFlow.md
-		SolutionStructure.md = SolutionStructure.md
+		06_DatabaseAndEFCore.md = 06_DatabaseAndEFCore.md
+		05_MiddlewareAndExceptionHandling.md = 05_MiddlewareAndExceptionHandling.md
+		04_DependencyInjection.md = 04_DependencyInjection.md
+		03_RequestFlow.md = 03_RequestFlow.md
+		02_SolutionStructure.md = 02_SolutionStructure.md
+		08_AuthenticationAndAuthorization.md = 08_AuthenticationAndAuthorization.md
+		07_CrudApis.md = 07_CrudApis.md
+		01_ProjectOverview.md = 01_ProjectOverview.md
+		09_GitWorkflowAndDevelopmentProcess.md = 09_GitWorkflowAndDevelopmentProcess.md
+		10_DesignPatternsAndSolidPrinciples.md = 10_DesignPatternsAndSolidPrinciples.md
 	EndProjectSection
 EndProject
 Global

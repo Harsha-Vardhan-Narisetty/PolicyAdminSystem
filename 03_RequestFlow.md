@@ -429,6 +429,47 @@ JSON Response
 
 ---
 
+# Authentication Request Flow
+
+User Login
+↓
+UsersController
+↓
+UserService
+↓
+UserRepository
+↓
+Database
+
+Password Verification
+↓
+BCrypt Verify
+↓
+Generate JWT Token
+↓
+Return Login Response
+
+---
+
+# Authorized Request Flow
+
+Client Request
+↓
+JWT Authentication Middleware
+↓
+JWT Validation
+↓
+Claims Principal Creation
+↓
+Authorization Check
+↓
+Controller
+↓
+Service Layer
+↓
+Repository
+↓
+Database
 # Benefits of Current Architecture
 
 The current architecture provides:

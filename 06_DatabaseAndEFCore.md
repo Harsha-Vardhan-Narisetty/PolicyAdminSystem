@@ -220,6 +220,40 @@ from existing database.
 
 This project used scaffold command.
 
+# User Table
+
+Purpose:
+
+Stores application users.
+
+Columns:
+
+- UserId
+- FirstName
+- LastName
+- Email
+- PasswordHash
+- Role
+- IsActive
+- CreatedDate
+
+---
+
+# Password Storage
+
+Passwords are never stored as plain text.
+
+Passwords are hashed using BCrypt before being stored in the database.
+
+Example:
+
+Password:
+
+Harsha123
+
+Stored Value:
+
+$2a$11$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ---
 
 # Scaffold Command
