@@ -9,9 +9,14 @@ namespace PolicyAdmin.Application.Services
     {
         private readonly IPolicyHolderRepository _policyHolderRepository;
 
-        public PolicyHolderService(IPolicyHolderRepository policyHolderRepository)
+        private readonly ICurrentUserService _currentUserService;
+
+        public PolicyHolderService(
+    IPolicyHolderRepository policyHolderRepository,
+    ICurrentUserService currentUserService)
         {
             _policyHolderRepository = policyHolderRepository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<ApiResponse<IEnumerable<PolicyHolderResponseDto>>> GetAllPolicyHoldersAsync()
@@ -72,7 +77,10 @@ namespace PolicyAdmin.Application.Services
 
                 CreatedDate = DateTime.Now,
 
-                IsActive = true
+                CreatedBy = _currentUserService.UserId,
+
+                IsActive = true,
+
             };
 
             var createdPolicyHolder = await _policyHolderRepository.AddAsync(policyHolder);
@@ -139,6 +147,12 @@ namespace PolicyAdmin.Application.Services
             existingPolicyHolder.PostalCode = request.PostalCode;
 
             existingPolicyHolder.Country = request.Country;
+
+            existingPolicyHolder.ModifiedBy =
+            _currentUserService.UserId;
+
+            existingPolicyHolder.ModifiedDate =
+                DateTime.UtcNow;
 
             var updatedPolicyHolder = await _policyHolderRepository.UpdateAsync(existingPolicyHolder);
 
